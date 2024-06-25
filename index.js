@@ -15,7 +15,7 @@ app.use(express.json())
 connectDB()
 
 const corsOptions = {
-  origin: 'https://project13-frontend.vercel.app/',
+  origin: 'https://project13-frontend.vercel.app',
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   optionsSuccessStatus: 200
 };
@@ -25,7 +25,7 @@ app.use(cors(corsOptions))
 app.use('/api/v1', mainRouter)
 
 app.use("*", (req, res, next) => {
-  return res.status(404).json("Route not found")
+  return res.status(408).json("Route not found")
 })
 
 app.listen(3000, () => {
