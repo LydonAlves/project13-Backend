@@ -11,8 +11,15 @@ app.use((req, res, next) => {
 })
 
 app.use(express.json())
+
 connectDB()
-app.use(cors())
+
+const corsOptions = {
+  origin: 'https://project13-frontend.vercel.app', // Replace with your frontend URL
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions))
 
 app.use('/api/v1', mainRouter)
 
