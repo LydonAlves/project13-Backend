@@ -15,7 +15,7 @@ app.use(express.json())
 connectDB()
 
 const corsOptions = {
-  origin: 'https://project13-frontend.vercel.app', // Replace with your frontend URL
+  origin: 'https://project13-frontend.vercel.app',
   optionsSuccessStatus: 200
 };
 
