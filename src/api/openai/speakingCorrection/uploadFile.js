@@ -1,9 +1,10 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const os = require('os');
 
 // const uploadsDir = path.join(__dirname, 'uploads');
-const uploadsDir = path.join('/tmp', 'uploads')
+const uploadsDir = path.join(os.tmpdir(), 'uploads');
 
 if (!fs.existsSync(uploadsDir)) {
   console.log(`Creating uploads directory at ${uploadsDir}`);
