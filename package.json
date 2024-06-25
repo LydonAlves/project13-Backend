@@ -1,0 +1,36 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "classActivitySeed": "node ./src/utils/seeds/classActivity.js",
+    "classGroupsSeed": "node ./src/utils/seeds/classGroups.js",
+    "classWithActivitiesSeed": "node ./src/utils/seeds/classWithActivities.js",
+    "gapFillTextSeed": "node ./src/utils/seeds/gapFillText.js",
+    "rulesSeed": "node ./src/utils/seeds/rules.js",
+    "speakingCorrectionsSeed": "node ./src/utils/seeds/speakingCorrection.js",
+    "userSeed": "node ./src/utils/seeds/users.js",
+    "videoExerciseSeed": "node ./src/utils/seeds/videoExercise.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.2",
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "form-data": "^4.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.4",
+    "multer": "^1.4.5-lts.1",
+    "openai": "^4.47.1"
+  }
+}
