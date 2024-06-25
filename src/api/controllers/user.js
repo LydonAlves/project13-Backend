@@ -1,9 +1,10 @@
-const bcrypt = require('bcrypt')
+//! this was changed from bcrypt to bcryptjs
+const bcrypt = require('bcryptjs')
+
+
 const User = require('../models/User')
 const { generateKey } = require('../../utils/jwt')
 
-//? This is still missing data, check origional doc
-//! need to do the routes, and authenticateion as well
 
 const getUserById = async (req, res, next) => {
   try {
