@@ -1,10 +1,8 @@
 //! this was changed from bcrypt to bcryptjs
 const bcrypt = require('bcryptjs')
 
-
-const User = require('../models/User')
 const { generateKey } = require('../../utils/jwt')
-
+const User = require('../models/User')
 
 const getUserById = async (req, res, next) => {
   try {
