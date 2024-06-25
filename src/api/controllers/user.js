@@ -2,7 +2,7 @@
 const bcrypt = require('bcryptjs')
 
 const { generateKey } = require('../../utils/jwt')
-const User = require('../models/User')
+const User = require('../models/user')
 
 const getUserById = async (req, res, next) => {
   try {
@@ -19,7 +19,7 @@ const getUserByClassGroup = async (req, res, next) => {
   if (!classGroup) {
     return res.status(400).json({ error: 'Class group parameter is required' });
   }
-  console.log(classGroup);
+
   try {
     const user = await User.find({ classGroup: classGroup })
     if (users.length === 0) {
