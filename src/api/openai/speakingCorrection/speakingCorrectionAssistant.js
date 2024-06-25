@@ -13,29 +13,19 @@ const sendToAssistant = async (transcriptionText) => {
   try {
     const assistant = await openai.beta.assistants.retrieve(speakingAssistant)
     console.log('Assistant retrieved:', assistant);
-
     const thread = await openai.beta.threads.create();
     console.log('Thread created:', thread);
-
     const modifiedText = `${transcriptionText}. json`
-
-    console.log(modifiedText);
-
-
+    console.log(modifiedText)
 
     const message = await openai.beta.threads.messages.create(thread.id, {
       role: "user",
       content: modifiedText,
     });
 
-
-
     const run = await openai.beta.threads.runs.create(thread.id, {
       assistant_id: assistant.id,
     });
-
-    console.log(run)
-
 
     const checkStatusAndReturnMessages = async (threadId, runId) => {
       let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
