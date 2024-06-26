@@ -11,15 +11,10 @@ const taskCreatorAssitant = process.env.OPENAI_TASK_CREATOR_ASSISTANT
 
 const createExam = async (req, res, next) => {
   const assistant = await openai.beta.assistants.retrieve(taskCreatorAssitant)
-
   const thread = await openai.beta.threads.create();
-  console.log(req.body)
 
   const { content } = req.body
   const modifiedContent = `${content}. json`;
-
-  //! I have to see how to send the message here from the frontend. req.body.????
-
 
   const message = await openai.beta.threads.messages.create(thread.id, {
     role: "user",
@@ -30,21 +25,16 @@ const createExam = async (req, res, next) => {
     assistant_id: assistant.id,
   });
 
-  console.log(run)
 
   const checkStatusAndPrintMessages = async (threadId, runId) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
 
-
-    //-------------------------------------
     while (runStatus.status === "queued" || runStatus.status === "in_progress") {
       console.log(`Run status: ${runStatus.status}`);
 
       await new Promise(resolve => setTimeout(resolve, 1000));
       runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
     }
-    console.log("runStatus", runStatus);
-    //-------------------------------------
 
 
     if (runStatus.status === "completed") {

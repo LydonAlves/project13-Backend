@@ -1,14 +1,15 @@
 const fs = require('fs');
+const os = require('os');
 const path = require('path');
 const axios = require('axios');
 const FormData = require('form-data');
-// const { default: OpenAI } = require('openai');
 const { sendToAssistant } = require('./speakingCorrectionAssistant');
 
 
 const uploadAndTranscribe = async (req, res, next) => {
+  // const filePath = path.join(__dirname, 'uploads', req.file.originalname);
+  const filePath = path.join(os.tmpdir(), 'uploads', req.file.originalname);
 
-  const filePath = path.join(__dirname, 'uploads', req.file.originalname);
   const model = "whisper-1";
   const formData = new FormData();
   formData.append("model", model);

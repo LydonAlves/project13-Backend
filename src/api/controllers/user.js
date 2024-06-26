@@ -1,6 +1,5 @@
 //! this was changed from bcrypt to bcryptjs
 const bcrypt = require('bcryptjs')
-
 const { generateKey } = require('../../utils/jwt')
 const User = require('../models/user')
 
@@ -36,7 +35,6 @@ const getUserByClassGroup = async (req, res, next) => {
 
 const getAllUsers = async (req, res, next) => {
   try {
-    console.log('functioning')
     const users = await User.find()
     return res.status(200).json(users)
   } catch (error) {
@@ -81,16 +79,13 @@ const register = async (req, res, next) => {
 
 const login = async (req, res, next) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body
     const user = await User.findOne({ email })
-    console.log(user);
     if (!user) {
       return res.status(400).json('User or password are incorrect')
     }
 
     if (bcrypt.compareSync(password, user.password)) {
-      // console.log("working");
       const token = generateKey(user._id)
       return res.status(200).json({ token, user })
     }

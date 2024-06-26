@@ -14,12 +14,13 @@ app.use(express.json())
 
 connectDB()
 
-const corsOptions = {
-  origin: 'https://project13-frontend.vercel.app',
-  methods: ['GET', 'PUT', 'POST', 'DELETE']
-};
+// const corsOptions = {
+//   origin: 'https://project13-frontend.vercel.app',
+//   methods: ['GET', 'PUT', 'POST', 'DELETE']
+// };
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+app.use(cors())
 
 app.use('/api/v1', mainRouter)
 
