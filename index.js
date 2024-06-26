@@ -16,7 +16,7 @@ connectDB()
 
 const corsOptions = {
   origin: 'https://project13-frontend.vercel.app',
-  optionsSuccessStatus: 200
+  methods: ['GET', 'PUT', 'POST', 'DELETE']
 };
 
 app.use(cors(corsOptions))
