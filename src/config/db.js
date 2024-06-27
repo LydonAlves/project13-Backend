@@ -11,3 +11,10 @@ const connectDB = async () => {
 }
 
 module.exports = { connectDB }
+
+
+
+
+//! It looks like I can set up a model and call the fucntion through there to have the db connected
+//* Read through chatgpt
+//* Read voiceToText
