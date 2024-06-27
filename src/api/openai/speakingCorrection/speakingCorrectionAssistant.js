@@ -14,11 +14,10 @@ const assistantHandler = async (req, res) => {
     const transcriptionText = req.body.transcriptionText;
     const speakingAssistant = req.body.speakingAssistant;
 
-    // Send periodic updates to keep the connection alive
     const intervalId = setInterval(() => {
       res.write('event: keep-alive\n');
       res.write('data: {}\n\n');
-    }, 10000); // Adjust the interval as needed
+    }, 10000);
 
     const assistant = await openai.beta.assistants.retrieve(speakingAssistant);
     console.log('Assistant retrieved:', assistant);
@@ -71,15 +70,13 @@ const assistantHandler = async (req, res) => {
     }
 
     const jsonString = cleanJSONString(assistantResponse[0]);
-    const jsonObject = JSON.parse(jsonString);
-
-    // Clear the interval and send the final response
+    const jsonObject = JSON.parse(jsonString)
     clearInterval(intervalId);
     res.status(200).json({ jsonObject });
 
   } catch (error) {
     console.error('Error communicating with the OpenAI Assistant:', error);
-    clearInterval(intervalId); // Clear the interval in case of an error
+    clearInterval(intervalId);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
