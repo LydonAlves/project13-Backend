@@ -1,5 +1,4 @@
 const crypto = require('crypto');
-
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -91,9 +90,6 @@ async function processTranscriptionInBackground(filePath, hash) {
 
 const checkCorrections = async (req, res) => {
   const hash = req.params.hash;
-  // console.log("hash", hash);
-
-  // console.log("Assistant answer global", assistantAnswer);
   try {
     const requestRecord = await Request.findOne({ hash });
     if (!requestRecord) {
