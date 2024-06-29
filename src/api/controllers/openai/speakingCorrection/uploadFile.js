@@ -3,7 +3,6 @@ const path = require('path');
 const fs = require('fs');
 const os = require('os');
 
-// const uploadsDir = path.join(__dirname, 'uploads');
 const uploadsDir = path.join(os.tmpdir(), 'uploads');
 
 if (!fs.existsSync(uploadsDir)) {

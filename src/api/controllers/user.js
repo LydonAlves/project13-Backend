@@ -32,7 +32,6 @@ const getUserByClassGroup = async (req, res, next) => {
   }
 }
 
-
 const getAllUsers = async (req, res, next) => {
   try {
     const users = await User.find()
@@ -120,11 +119,29 @@ const putUserInfo = async (req, res, next) => {
   }
 }
 
+const deleteUserById = async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    return res.status(200).json({ message: 'User deleted successfully' });
+  } catch (error) {
+    return res.status(400).json({ message: 'Error deleting user', error });
+  }
+};
+
+
+
 module.exports = {
   getUserById,
   getUserByClassGroup,
   getAllUsers,
   register,
   login,
-  putUserInfo
+  putUserInfo,
+  deleteUserById
 }

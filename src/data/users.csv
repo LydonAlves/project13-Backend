@@ -1,8 +1,8 @@
 country,email,password,role,userName,classGroup,_id
-South Africa,lydon@example.com,Lyd123,admin,Lydon Alves,,665c7bb9869680ba3df6c472
+South Africa,dave@example.com,Dave123,admin,David Thompson,,665c7bb9869680ba3df6c472
 United States,tim@example.com,Tim123,teacher,Tim Doe,,66425ab3a20ab5405b9de773
 Canada,jane@example.com,Jane123,teacher,Jane Smith,,6642f014a20ab5405b9de7be
-Australia,sam.brown3@example.com,SamBrown123,student,Sam Brown,665c7baf869680ba3df6c46f,
+Australia,sam@example.com,Sam123,student,Sam Brown,665c7baf869680ba3df6c46f,
 United Kingdom,lucy.jones4@example.com,LucyJones123,student,Lucy Jones,665c7baf869680ba3df6c46f,
 India,rohan.patel5@example.com,RohanPatel123,student,Rohan Patel,665c7baf869680ba3df6c46f,
 Germany,anna.schmidt6@example.com,AnnaSchmidt123,student,Anna Schmidt,665c7baf869680ba3df6c46f,

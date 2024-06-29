@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const fs = require('fs')
 const path = require('path');
-const User = require("../../api/models/User");
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const { launchSeed } = require("../seedFunction");
+const User = require("../../api/models/user");
 
 const convertCSVtoArray = (callback) => {
   const filePath = path.join(__dirname, '..', '..', 'data', 'users.csv');

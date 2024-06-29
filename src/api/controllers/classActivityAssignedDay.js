@@ -1,9 +1,6 @@
 const ClassWithActivities = require("../models/classActivityAssignedDay");
 
-
-//! Do I need this?? Or am I just downloading all for a user and running over them in the code?
 const getClassActivityByDate = async (req, res, next) => {
-  console.log(req.body);
   try {
     const { date } = req.params;
     const startOfDay = new Date(date);
@@ -30,10 +27,8 @@ const getClassActivityByDate = async (req, res, next) => {
   }
 }
 
-
 const getClassWithActivitiesByUserID = async (req, res, next) => {
   const { userId } = req.params
-  console.log("working");
   try {
     const classWithActivities = await ClassWithActivities.find({ createdBy: userId });
     res.status(200).json(classWithActivities);
@@ -44,10 +39,6 @@ const getClassWithActivitiesByUserID = async (req, res, next) => {
 }
 
 
-
-
-//* in use
-//todo: Maybe I need to download the whole list and run over it
 const getAllClassActivityByDate = async (req, res, next) => {
   try {
     const classWithActivities = await ClassWithActivities.find()
@@ -57,12 +48,8 @@ const getAllClassActivityByDate = async (req, res, next) => {
   }
 }
 
-
-
-
-//* in use
 const postClassActivityAssignedByDate = async (req, res, next) => {
-  console.log(req.body);
+
   try {
     const newClassWithActivities = new ClassWithActivities(req.body)
     const classActivity = await newClassWithActivities.save()
@@ -74,7 +61,7 @@ const postClassActivityAssignedByDate = async (req, res, next) => {
   }
 }
 
-//* in use
+
 const putClassActivityAssignedByDate = async (req, res, next) => {
   const { id } = req.params;
 
@@ -95,9 +82,8 @@ const putClassActivityAssignedByDate = async (req, res, next) => {
   }
 }
 
-//* in use
+
 const removeClassFromActivityByClassID = async (req, res, next) => {
-  console.log("The new function is working", req.params);
   const { id } = req.params
 
   try {

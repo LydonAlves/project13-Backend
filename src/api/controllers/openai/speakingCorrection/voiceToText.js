@@ -5,7 +5,7 @@ const path = require('path');
 const axios = require('axios');
 const FormData = require('form-data');
 const { sendToAssistant } = require('./speakingCorrectionAssistant');
-const Request = require('../../models/openaiRequest');
+const Request = require('../../../models/openaiRequest');
 
 let assistantAnswer = ""
 
@@ -21,7 +21,6 @@ const uploadAndTranscribe = async (req, res) => {
     }
 
     const existingRequest = await Request.findOne({ hash });
-    console.log("existing request", existingRequest);
 
     if (existingRequest) {
       return res.json({ hash, status: existingRequest.status });
@@ -64,11 +63,9 @@ async function processTranscriptionInBackground(filePath, hash) {
 
 
     const transcriptionText = transcription.data.text;
-    // console.log("transctiption text", transcriptionText);
 
 
     const assistantResponse = await sendToAssistant(transcriptionText);
-    // console.log("assistant response", assistantResponse);
 
     if (assistantResponse.jsonObject.student_input) {
       assistantAnswer = assistantResponse
