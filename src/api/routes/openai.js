@@ -3,8 +3,6 @@ const { uploadAndTranscribe, checkCorrections } = require('../controllers/openai
 const { createExam } = require('../controllers/openai/examCreator/examCreatorAssistans')
 const upload = require('../controllers/openai/speakingCorrection/uploadFile')
 
-
-
 const openaiRouter = require('express').Router()
 
 openaiRouter.post('/uploadTranscribe', upload.single("file"), uploadAndTranscribe)

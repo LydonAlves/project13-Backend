@@ -1,6 +1,5 @@
 const { getClassGroupsID, getAllClassGroups, postClassGroups, deleteClassGroup, getClassGroupsByUserID } = require('../controllers/classGroup')
 
-
 const classGroupRouter = require('express').Router()
 
 classGroupRouter.get('/:id', getClassGroupsID)

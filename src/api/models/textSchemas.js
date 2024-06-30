@@ -1,8 +1,5 @@
 const mongoose = require("mongoose");
 
-//!I have added rules here, this is to save the rules assigned to the exercise
-//! explain this in the README
-
 const rulesInExerciseSchema = new mongoose.Schema(
   {
     explanation: { type: String, required: true },

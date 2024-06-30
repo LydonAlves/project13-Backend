@@ -30,12 +30,9 @@ const createExam = async (req, res, next) => {
     let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
 
     while (runStatus.status === "queued" || runStatus.status === "in_progress") {
-      console.log(`Run status: ${runStatus.status}`);
-
       await new Promise(resolve => setTimeout(resolve, 1000));
       runStatus = await openai.beta.threads.runs.retrieve(thread.id, run.id);
     }
-
 
     if (runStatus.status === "completed") {
       let messages = await openai.beta.threads.messages.list(threadId);
@@ -47,7 +44,6 @@ const createExam = async (req, res, next) => {
 
 
   const assistantResponse = await checkStatusAndPrintMessages(thread.id, run.id)
-
   function cleanJSONString(inputString) {
     let cleanedString = inputString
       .replace(/\n/g, '')
@@ -63,7 +59,6 @@ const createExam = async (req, res, next) => {
   console.log(JSON.stringify(jsonObject, null, 2));
 
   return res.status(200).json(jsonObject)
-
 }
 
 module.exports = {

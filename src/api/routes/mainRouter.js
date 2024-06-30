@@ -20,5 +20,4 @@ mainRouter.use('/openai', openaiRouter)
 mainRouter.use('/speakingCorrection', speakingCorrectionRouter)
 mainRouter.use('/user', usersRouter)
 
-
 module.exports = mainRouter

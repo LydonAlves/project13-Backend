@@ -38,7 +38,6 @@ const getClassWithActivitiesByUserID = async (req, res, next) => {
   }
 }
 
-
 const getAllClassActivityByDate = async (req, res, next) => {
   try {
     const classWithActivities = await ClassWithActivities.find()
@@ -49,7 +48,6 @@ const getAllClassActivityByDate = async (req, res, next) => {
 }
 
 const postClassActivityAssignedByDate = async (req, res, next) => {
-
   try {
     const newClassWithActivities = new ClassWithActivities(req.body)
     const classActivity = await newClassWithActivities.save()
@@ -60,7 +58,6 @@ const postClassActivityAssignedByDate = async (req, res, next) => {
     return res.status(400).json(error)
   }
 }
-
 
 const putClassActivityAssignedByDate = async (req, res, next) => {
   const { id } = req.params;
@@ -82,25 +79,19 @@ const putClassActivityAssignedByDate = async (req, res, next) => {
   }
 }
 
-
 const removeClassFromActivityByClassID = async (req, res, next) => {
   const { id } = req.params
 
   try {
-    console.log("Preparing to update documents where classesArray contains classID:", id);
-
     const result = await ClassWithActivities.updateMany(
       { "classes._id": id },
       { $pull: { classes: { _id: id } } }
-    );
-
-    console.log("UpdateMany Result:", result);
+    )
 
     if (result.modifiedCount === 0) {
       return res.status(404).json({ message: `No documents found with classID ${id}.` });
     }
 
-    console.log(`${result.modifiedCount} documents were updated.`);
     return res.status(200).json({ message: `${result.modifiedCount} documents were updated.` });
   } catch (error) {
     console.error('Error in removeClassFromActivityByClassID:', error);
@@ -109,7 +100,6 @@ const removeClassFromActivityByClassID = async (req, res, next) => {
 }
 
 const deleteClassActivityAssignedByDate = async (req, res, next) => {
-  console.log("Delete classactivity working");
   const { id } = req.params
   try {
     const deletedClassActivity = await ClassWithActivities.findByIdAndDelete(id);

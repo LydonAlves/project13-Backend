@@ -9,7 +9,6 @@ const Request = require('../../../models/openaiRequest');
 
 let assistantAnswer = ""
 
-
 const uploadAndTranscribe = async (req, res) => {
 
   const filePath = path.join(os.tmpdir(), 'uploads', req.file.originalname);
@@ -28,11 +27,7 @@ const uploadAndTranscribe = async (req, res) => {
 
     const newRequest = new Request({ hash, filePath });
 
-    console.log("newRequest", newRequest);
-
     await newRequest.save();
-
-    // console.log("res", res);
     res.status(202).json({ hash, status: 'pending' });
 
     processTranscriptionInBackground(filePath, hash);
@@ -44,7 +39,6 @@ const uploadAndTranscribe = async (req, res) => {
 };
 
 async function processTranscriptionInBackground(filePath, hash) {
-  console.log("file path", filePath);
 
   const model = "whisper-1";
   const formData = new FormData();
@@ -53,7 +47,6 @@ async function processTranscriptionInBackground(filePath, hash) {
 
   try {
     const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-
     const transcription = await axios.post('https://api.openai.com/v1/audio/transcriptions', formData, {
       headers: {
         Authorization: `Bearer ${OPENAI_API_KEY}`,
@@ -61,10 +54,7 @@ async function processTranscriptionInBackground(filePath, hash) {
       }
     });
 
-
     const transcriptionText = transcription.data.text;
-
-
     const assistantResponse = await sendToAssistant(transcriptionText);
 
     if (assistantResponse.jsonObject.student_input) {
@@ -95,7 +85,6 @@ const checkCorrections = async (req, res) => {
 
     if (assistantAnswer) {
       await Request.deleteOne({ hash });
-      console.log(`Request record with hash ${hash} deleted.`);
       return res.status(200).json(assistantAnswer)
     } else {
       res.json({ status: requestRecord.status, content: requestRecord.content || null });

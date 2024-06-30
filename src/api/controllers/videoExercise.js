@@ -12,7 +12,7 @@ const getVideoExerciseByID = async (req, res, next) => {
 
 const getVideoExerciseByUserID = async (req, res, next) => {
   const { userId } = req.params
-  console.log("working");
+
   try {
     const videoExercise = await VideoExercise.find({ createdBy: userId });
     res.status(200).json(videoExercise);
@@ -31,9 +31,7 @@ const getAllVideoExercise = async (req, res, next) => {
   }
 }
 
-
 const postVideoExercise = async (req, res, next) => {
-  console.log(req.body);
   try {
     const newVideoExercise = new VideoExercise(req.body)
     const videoExercise = await newVideoExercise.save()
@@ -55,7 +53,6 @@ const deleteVideoExercise = async (req, res, next) => {
     return res.status(400).json('Error in the request')
   }
 }
-
 
 module.exports = {
   getVideoExerciseByID,

@@ -46,17 +46,13 @@ const getClassActivityByUserRole = async (req, res, next) => {
 }
 
 
-
-
 const getAllClassActivity = async (req, res, next) => {
   try {
-
     const classActivity = await ClassActivity.find()
       .populate('activitiesID.gapFill')
       .populate('activitiesID.video')
       .exec();
 
-    console.log("Query completed. Fetched class activities:", classActivity);
     return res.status(200).json(classActivity)
   } catch (error) {
     return res.status(400).json(error)
@@ -65,7 +61,6 @@ const getAllClassActivity = async (req, res, next) => {
 
 
 const postClassActivity = async (req, res, next) => {
-  console.log(req.body);
   try {
     const newClassActivity = new ClassActivity(req.body)
     const classActivity = await newClassActivity.save()

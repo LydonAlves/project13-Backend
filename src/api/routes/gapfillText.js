@@ -1,6 +1,5 @@
 const { getGapfillTextByID, postGapfillText, getAllGapfillText, getGapFillByUserID } = require('../controllers/gapFillText')
 
-
 const gapfillTextRouter = require('express').Router()
 
 gapfillTextRouter.get('/:id', getGapfillTextByID)

@@ -1,6 +1,5 @@
 const GapFillText = require("../models/gapFillText");
 
-//*in use
 const getGapfillTextByID = async (req, res, next) => {
   try {
     const { id } = req.params
@@ -22,7 +21,6 @@ const getGapFillByUserID = async (req, res, next) => {
   }
 }
 
-//*in use
 const getAllGapfillText = async (req, res, next) => {
   try {
     const gapfillText = await GapFillText.find()
@@ -32,7 +30,6 @@ const getAllGapfillText = async (req, res, next) => {
   }
 }
 
-//*in use
 const postGapfillText = async (req, res, next) => {
   try {
     const newGapfillText = new GapFillText(req.body)

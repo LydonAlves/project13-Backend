@@ -1,4 +1,3 @@
-//! this was changed from bcrypt to bcryptjs
 const bcrypt = require('bcryptjs')
 const { generateKey } = require('../../utils/jwt')
 const User = require('../models/user')
@@ -41,14 +40,9 @@ const getAllUsers = async (req, res, next) => {
   }
 }
 
-
 const register = async (req, res, next) => {
   try {
-    console.log('Request body:', req.body);
-
     const userDuplicated = await User.findOne({ userName: req.body.userName })
-
-    console.log('User duplication check:', userDuplicated);
 
     if (userDuplicated) {
       console.log('User already exists, choose a different name.');
@@ -64,11 +58,7 @@ const register = async (req, res, next) => {
       userName: req.body.userName,
     })
 
-    console.log('New user object:', newUser);
-
     const user = await newUser.save()
-
-    console.log('Saved user:', user);
 
     return res.status(200).json(user)
   } catch (error) {
@@ -97,9 +87,8 @@ const login = async (req, res, next) => {
 
 const putUserInfo = async (req, res, next) => {
   const { id } = req.params;
-  console.log(id);
-  try {
 
+  try {
     const user = await User.findById(id);
     if (!user) {
       console.log("User not found with ID:", id);
@@ -110,7 +99,6 @@ const putUserInfo = async (req, res, next) => {
       new: true,
       runValidators: true
     });
-    console.log("updated user", updatedUser);
 
     return res.status(200).json(updatedUser);
   } catch (error) {
@@ -133,8 +121,6 @@ const deleteUserById = async (req, res, next) => {
     return res.status(400).json({ message: 'Error deleting user', error });
   }
 };
-
-
 
 module.exports = {
   getUserById,

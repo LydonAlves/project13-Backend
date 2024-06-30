@@ -1,14 +1,5 @@
 const SpeakingCorrection = require("../models/speakingCorrection");
 
-//! not used, should delete
-// const getAllSpeakingCorrection = async (req, res, next) => {
-//   try {
-//     const speakingCorrection = await SpeakingCorrection.find()
-//     return res.status(200).json(speakingCorrection)
-//   } catch (error) {
-//     return res.status(400).json(error)
-//   }
-// }
 
 const getSpeakingCorrectionByUserID = async (req, res, next) => {
   const { userId } = req.params
@@ -20,7 +11,6 @@ const getSpeakingCorrectionByUserID = async (req, res, next) => {
     res.status(500).json({ error: 'Server error' });
   }
 }
-
 
 const postSpeakingCorrection = async (req, res, next) => {
   try {
