@@ -68,4 +68,4 @@ const createExam = async (req, res, next) => {
 
 module.exports = {
   createExam
-}
+} 
