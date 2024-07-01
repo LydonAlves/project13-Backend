@@ -38,6 +38,19 @@ const getClassWithActivitiesByUserID = async (req, res, next) => {
   }
 }
 
+const getClassActivitiesByClassID = async (req, res, next) => {
+  const { classId } = req.params
+  try {
+    const activities = await ClassWithActivities.find({ 'classes._id': classId })
+    console.log(activities);
+    res.status(200).json(activities)
+  } catch (error) {
+    console.error('Error fetching activities:', error);
+    res.status(500).json({ error: 'Server error' });
+  }
+}
+
+
 const getAllClassActivityByDate = async (req, res, next) => {
   try {
     const classWithActivities = await ClassWithActivities.find()
@@ -118,6 +131,7 @@ const deleteClassActivityAssignedByDate = async (req, res, next) => {
 module.exports = {
   getClassActivityByDate,
   getClassWithActivitiesByUserID,
+  getClassActivitiesByClassID,
   getAllClassActivityByDate,
   postClassActivityAssignedByDate,
   putClassActivityAssignedByDate,

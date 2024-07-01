@@ -7,12 +7,14 @@ const activityObj = new mongoose.Schema(
   }, { _id: false }
 )
 
+
 const updatedClass = new mongoose.Schema(
   {
     activityObj: { type: activityObj, required: false },
     name: { type: String },
+    _id: { type: String },
     selected: { type: Boolean },
-  }, { _id: false }
+  }
 )
 
 

@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const { default: OpenAI } = require("openai");
 
 const openai = new OpenAI({
@@ -7,6 +6,9 @@ const openai = new OpenAI({
 })
 
 const speakingAssistant = process.env.OPENAI_SPEAKING_ASSISTANT
+
+
+
 
 const sendToAssistant = async (transcriptionText) => {
   try {
@@ -40,7 +42,6 @@ const sendToAssistant = async (transcriptionText) => {
     };
 
     const assistantResponse = await checkStatusAndReturnMessages(thread.id, run.id);
-
     function cleanJSONString(inputString) {
       let cleanedString = inputString
         .replace(/\n/g, '')

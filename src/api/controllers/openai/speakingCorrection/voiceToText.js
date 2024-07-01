@@ -9,7 +9,7 @@ const Request = require('../../../models/openaiRequest');
 
 let assistantAnswer = ""
 
-const uploadAndTranscribe = async (req, res) => {
+const uploadAndTranscribe = async (req, res, next) => {
 
   const filePath = path.join(os.tmpdir(), 'uploads', req.file.originalname);
   const hash = crypto.createHash('sha256').update(filePath).digest('hex');
@@ -94,6 +94,13 @@ const checkCorrections = async (req, res) => {
     res.status(500).json({ message: 'Error processing your request', details: error.message });
   }
 };
+
+
+
+
+
+
+
 
 
 // const uploadAndTranscribe = async (req, res, next) => {
