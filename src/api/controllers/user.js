@@ -42,13 +42,11 @@ const getAllUsers = async (req, res, next) => {
 
 const register = async (req, res, next) => {
   try {
-    const userDuplicated = await User.findOne({ userName: req.body.userName })
+    const emailDuplicated = await User.findOne({ email: req.body.email });
 
-    if (userDuplicated) {
-      console.log('User already exists, choose a different name.');
-      return res
-        .status(409)
-        .json('User already exists, choose a different name.')
+    if (emailDuplicated) {
+      console.log('Email already exists, please use a different email.');
+      return res.status(410).json({ message: 'Email already exists, please use a different email.' });
     }
 
     const newUser = new User({
@@ -62,7 +60,15 @@ const register = async (req, res, next) => {
 
     return res.status(200).json(user)
   } catch (error) {
-    return res.status(400).json(error)
+    if (error.code === 11000) {
+      if (error.keyPattern && error.keyPattern.email) {
+        return res.status(409).json({ message: 'Email already exists, please use a different email.' });
+      } else if (error.keyPattern && error.keyPattern.userName) {
+        return res.status(409).json({ message: 'Username already exists, please use a different username.' });
+      }
+    }
+
+    return res.status(400).json({ message: 'An error occurred during registration.', error });
   }
 }
 
