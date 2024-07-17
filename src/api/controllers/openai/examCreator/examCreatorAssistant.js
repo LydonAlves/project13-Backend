@@ -60,6 +60,9 @@ const processExamInBackground = async (content, hash) => {
       assistant_id: assistant.id,
     });
 
+
+
+
     const checkStatusAndPrintMessages = async (threadId, runId) => {
       let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
 

@@ -5,8 +5,8 @@ const { gapFillAnswerSchema, textObjSchema } = require("./textSchemas");
 const playerVarsSchema = new mongoose.Schema(
   {
     autoplay: { type: Number, required: true },
-    end: { type: Number, required: true },
-    start: { type: Number, required: true }
+    end: { type: Number, required: false, default: null },
+    start: { type: Number, required: false, default: null }
   }, { _id: false }
 )
 
@@ -22,8 +22,8 @@ const optsSchema = new mongoose.Schema(
 
 
 const chosenTimesSchema = new mongoose.Schema({
-  endTimeSaved: { type: String, required: true },
-  startTimeSaved: { type: String, required: true }
+  endTimeSaved: { type: String, required: false, default: null },
+  startTimeSaved: { type: String, required: false, default: null }
 }, { _id: false }
 );
 
