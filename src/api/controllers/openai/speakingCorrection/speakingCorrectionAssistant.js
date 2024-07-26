@@ -11,10 +11,11 @@ const speakingAssistant = process.env.OPENAI_SPEAKING_ASSISTANT
 
 
 const sendToAssistant = async (transcriptionText) => {
+  console.log(transcriptionText);
   try {
     const assistant = await openai.beta.assistants.retrieve(speakingAssistant)
     const thread = await openai.beta.threads.create();
-    const modifiedText = `${transcriptionText}. json`
+    const modifiedText = `${transcriptionText}.json`
 
     const message = await openai.beta.threads.messages.create(thread.id, {
       role: "user",

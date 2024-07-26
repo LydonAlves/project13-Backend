@@ -90,11 +90,12 @@ const checkCorrections = async (req, res) => {
       res.json({ status: requestRecord.status, content: requestRecord.content || null });
     }
   } catch (error) {
+    await Request.deleteOne({ hash });
     console.error('Error retrieving request status:', error);
     res.status(500).json({ message: 'Error processing your request', details: error.message });
+    return
   }
 };
-
 
 
 
