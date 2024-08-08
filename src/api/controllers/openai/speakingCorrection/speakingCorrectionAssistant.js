@@ -1,14 +1,13 @@
 require('dotenv').config();
 const { default: OpenAI } = require("openai");
+const cleanJSONString = require('../../../../utils/cleanJsonString');
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 })
 
 const speakingAssistant = process.env.OPENAI_SPEAKING_ASSISTANT
-
-
-
 
 const sendToAssistant = async (transcriptionText) => {
   console.log(transcriptionText);
@@ -43,16 +42,6 @@ const sendToAssistant = async (transcriptionText) => {
     };
 
     const assistantResponse = await checkStatusAndReturnMessages(thread.id, run.id);
-    function cleanJSONString(inputString) {
-      let cleanedString = inputString
-        .replace(/\n/g, '')
-        .replace(/\\n/g, '')
-        .replace(/\\'/g, "'")
-        .replace(/\\/g, '')
-        .replace(/\s*\+\s*/g, '');
-      return cleanedString;
-    }
-
     const jsonString = cleanJSONString(assistantResponse[0])
     const jsonObject = JSON.parse(jsonString);
 

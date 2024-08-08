@@ -2,6 +2,8 @@ require('dotenv').config();
 const crypto = require('crypto');
 const { default: OpenAI } = require("openai");
 const Request = require('../../../models/openaiRequest');
+const cleanJSONString = require('../../../../utils/cleanJsonString');
+
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
@@ -31,9 +33,6 @@ const createExam = async (req, res, next) => {
 
 
     processExamInBackground(content, hash);
-
-    // return res.status(202).json({ status: 'processing', hash });
-
   } catch (error) {
     console.error('Error in uploadAndTranscribe:', error);
     return res.status(500).json({ message: 'Server error during request initiation.' });
@@ -51,14 +50,11 @@ const processExamInBackground = async (content, hash) => {
     const message = await openai.beta.threads.messages.create(thread.id, {
       role: "user",
       content: modifiedContent,
-    });
+    })
 
     const run = await openai.beta.threads.runs.create(thread.id, {
       assistant_id: assistant.id,
-    });
-
-
-
+    })
 
     const checkStatusAndPrintMessages = async (threadId, runId) => {
       let runStatus = await openai.beta.threads.runs.retrieve(threadId, runId);
@@ -78,16 +74,6 @@ const processExamInBackground = async (content, hash) => {
 
     const assistantResponse = await checkStatusAndPrintMessages(thread.id, run.id);
 
-    function cleanJSONString(inputString) {
-      let cleanedString = inputString
-        .replace(/\n/g, '')
-        .replace(/\\n/g, '')
-        .replace(/\\'/g, "'")
-        .replace(/\\/g, '')
-        .replace(/\s*\+\s*/g, '');
-      return cleanedString;
-    }
-
     console.log("assistant response", assistantResponse);
     const jsonString = cleanJSONString(assistantResponse[0]);
     const jsonObject = JSON.parse(jsonString);
@@ -100,7 +86,7 @@ const processExamInBackground = async (content, hash) => {
     console.error('Error in processExamInBackground:', error);
     await Request.updateOne({ hash }, { $set: { status: 'error', errorDetails: error.message } });
   }
-};
+}
 
 
 const checkExamCreatedProgress = async (req, res) => {
@@ -124,8 +110,7 @@ const checkExamCreatedProgress = async (req, res) => {
     console.error('Error retrieving request status:', error);
     res.status(500).json({ message: 'Error processing your request', details: error.message });
   }
-};
-
+}
 
 
 module.exports = {

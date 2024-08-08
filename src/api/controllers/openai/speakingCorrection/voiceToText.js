@@ -83,6 +83,7 @@ const checkCorrections = async (req, res) => {
       return res.status(404).json({ message: 'Request record not found.' });
     }
 
+
     if (assistantAnswer) {
       await Request.deleteOne({ hash });
       return res.status(200).json(assistantAnswer)
@@ -90,7 +91,7 @@ const checkCorrections = async (req, res) => {
       res.json({ status: requestRecord.status, content: requestRecord.content || null });
     }
   } catch (error) {
-    await Request.deleteOne({ hash });
+    // await Request.deleteOne({ hash });
     console.error('Error retrieving request status:', error);
     res.status(500).json({ message: 'Error processing your request', details: error.message });
     return
