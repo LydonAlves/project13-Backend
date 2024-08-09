@@ -22,7 +22,7 @@ connectDB()
 // // app.use(cors(corsOptions))
 
 //* use below for local network, and above for vercel
-// app.use(cors())
+app.use(cors())
 
 app.use('/api/v1', mainRouter)
 
