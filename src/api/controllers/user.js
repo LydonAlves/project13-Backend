@@ -20,7 +20,7 @@ const getUserByClassGroup = async (req, res, next) => {
 
   try {
     const user = await User.find({ classGroup: classGroup })
-    if (users.length === 0) {
+    if (classGroup.length === 0) {
       return res.status(404).json({ message: 'No users found for this class group' });
     }
 
@@ -77,7 +77,7 @@ const login = async (req, res, next) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
     if (!user) {
-      return res.status(400).json('User or password are incorrect')
+      return res.status(401).json('User or password are incorrect')
     }
 
     if (bcrypt.compareSync(password, user.password)) {
@@ -85,7 +85,7 @@ const login = async (req, res, next) => {
       return res.status(200).json({ token, user })
     }
 
-    return res.status(400).json('User or password are incorrect')
+    return res.status(401).json('User or password are incorrect')
   } catch (error) {
     return res.status(400).json(error)
   }

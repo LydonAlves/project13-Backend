@@ -3,6 +3,7 @@ const SpeakingCorrection = require("../models/speakingCorrection");
 
 const getSpeakingCorrectionByUserID = async (req, res, next) => {
   const { userId } = req.params
+
   try {
     const speakingCorrection = await SpeakingCorrection.find({ createdBy: userId });
     res.status(200).json(speakingCorrection);
